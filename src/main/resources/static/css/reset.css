@@ -50,4 +50,6 @@ body {
 	
 	background-color: #F8F4F4;
 }
-
+form {
+	display: contents;
+}

@@ -5,8 +5,6 @@
 	<link rel="stylesheet" href="/css/reset.css">
 	<link rel="stylesheet" href="/css/index.css">
 	<title>My Account</title>
-<style>
-</style>
 </head>
 <body>
 	<div class="join-container">
@@ -30,35 +28,28 @@
 			</div>
 		</div>
 		<div class="join-right">
-			<p>USERNAME</p>
-			<input type="text" id="username" name="username"/>
-			<label class="right-input-label">성함이나 닉네임을 입력해주세요.</label>
-			<p>USERID</p>
-			<input type="text" id="userid" name="userid"/>
-			<label class="right-input-label">사용하실 아이디를 입력하세요. 특수문자는 사용할 수 없습니다.</label>
-			<p>PASSWORD</p>
-			<input type="password" id="password" name="password"/>
-			<label class="right-input-label">8 ~ 15자의 비밀번호를 설정하세요.</label>
-			<!-- ✔ 입력 데이터가 유효합니다. JOIN 버튼을 클릭하세요. -->
-			<div id="reg"></div>
-			<div class="join-right-box">
-				<button id="join" class="btn-blue">B A C K</button>
-				<button id="join" class="btn-blue">J O I N</button>
+			<div class="join-right-top">
+				<div class="join-h1">회원가입</div>
 			</div>
+			<form id="form">
+				<p>USERNAME</p>
+				<input type="text" id="username" placeholder="닉네임 또는 이름"/>
+				<label class="right-input-label"></label>
+				<p>USERID</p>
+				<input type="text" id="userid" placeholder="아이디"/>
+				<label class="right-input-label"></label>
+				<p>PASSWORD</p>
+				<input type="password" id="password" placeholder="비밀번호"/>
+				<label class="right-input-label"></label>
+				<!-- ✔ 입력 데이터가 유효합니다. JOIN 버튼을 클릭하세요. -->
+				<div id="reg"></div>
+				<div class="join-right-box">
+					<button id="back" class="btn-blue" type="submit">B A C K</button>
+					<button id="join" class="btn-blue" type="submit">J O I N</button>
+				</div>
+			</form>
 		</div>
 	</div>
-<script>
-	const regEl = document.querySelector('[id=reg]');
-	const password = document.querySelector('[id=password]');
-	
-	password.addEventListener('keydown', () => {
-		let username = document.querySelector('[id=username]').value;
-		let userid = document.querySelector('[id=userid]').value;
-		
-		if(username != '' && userid != '' && password.value.length > 7 && password.value.length <= 15) {
-			regEl.innerHTML = '✔ 입력 데이터가 유효합니다. JOIN 버튼을 클릭하세요.';
-		}
-	});
-</script>
+<script src="/js/index.js"></script>
 </body>
 </html>

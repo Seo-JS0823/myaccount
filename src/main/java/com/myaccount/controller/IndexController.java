@@ -9,6 +9,7 @@ public class IndexController {
 	@GetMapping("/")
 	public String indexForm() {
 		
-		return "index";
+		return "home";
 	}
+	
 }

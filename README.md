@@ -1,7 +1,5 @@
 # myaccount
 
+로그인, 회원가입 기능, 페이지 완료: 2025 09 11
 
-CREATE TABLE USERS (
-USERID VARCHAR2(20) primary key,
-PASSWORD varchar2(64) not null,
-USERNAME varchar2(20) not null);
+Account 대시보드 레이아웃 틀 완료 : 2025 09 12

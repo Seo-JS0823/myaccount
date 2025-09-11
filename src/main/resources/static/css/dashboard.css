@@ -1,5 +1,10 @@
 @charset "UTF-8";
-
+@font-face {
+    font-family: 'NexonMaplestory';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFLight.woff') format('woff');
+    font-weight: 300;
+    font-display: swap;
+}
 body {
 	width: 100vw;
 	height: 100vh;
@@ -9,16 +14,18 @@ body {
 img {
 	width: 40px;
 	height: 40px;
+	transition: width 0.3s ease;
 }
 .account-nav {
+	flex-shrink: 0;
 	width: 300px;
 	height: 100%;
-	background-color: #F0FFFF;
+	background-color: #B0C4DE;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: flex-start;
-	transition: width 0.6s ease;
+	transition: width 0.5s ease;
 	border-right: 1px solid #333;
 }
 .item {
@@ -42,8 +49,9 @@ img {
 	color: white;
 	font-size: 20px;
 	text-shadow: 0 0 3px #FFF;
-	transition: background-position 0.6s ease;
+	transition: background-position, width 0.6s ease;
 	cursor: pointer;
+	margin-bottom: 50px;
 }
 .item:nth-of-type(1):hover {
 	background-position: 100% 0;
@@ -56,3 +64,160 @@ img {
 	padding-left: 15px;
 	white-space: nowrap;
 }
+@media (max-width: 800px) {
+	.account-nav {
+		width: 103px;
+	}
+	.item-a {
+		display: none;
+	}
+}
+.account-container {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	padding: 30px;
+	overflow: auto;
+}
+.account-container::-webkit-scrollbar {
+	display: none;
+}
+.account-box {
+	width: 100%;
+	height: 30%;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: minmax(400px ,1fr) minmax(400px ,1fr) minmax(400px ,1fr);
+	grid-gap: 20px;
+}
+.account-box-g {
+	min-height: 250px;
+	background-color: white;
+	box-shadow: 0 0 10px rgba(66, 66, 66, 0.1);
+	border-radius: 5px;
+	padding: 20px;
+	display: flex;
+	flex-direction: row;
+}
+.chart {
+	font-size: 25px;
+	text-align: center;
+	display: flex;
+	flex-direction: row;
+}
+.account-box:nth-of-type(2) {
+	margin-top: 20px;
+	height: 70%;
+	min-height: 600px;
+}
+.account-box:nth-of-type(2) .account-box-g {
+	display: grid;
+}
+.account-box:nth-of-type(2) .account-box-g:first-child {
+	grid-column: 1 / span 2;
+	grid-template-rows: 30% auto;
+	grid-gap: 10px;
+}
+.account-box:nth-of-type(2) .account-box-g .chart {
+	background-color: lightpink;
+}
+.account-box:nth-of-type(1) .account-box-g {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 10px;
+}
+.account-box:nth-of-type(1) .chart:first-child {
+	align-items: center;
+	justify-content: center;
+	font-family: NexonMaplestory;
+	flex-direction: column;
+}
+.account-box:nth-of-type(1) .account-box-g:nth-of-type(3) {
+	grid-template-columns: 1fr 1fr;
+}
+.account-box:nth-of-type(1) .account-box-g:nth-of-type(3) .chart {
+	align-items: center;
+	flex-direction: column;
+	font-family: NexonMaplestory;
+	justify-content: center;
+}
+.donut {
+	width: 50%;
+	height: 50%;
+	border-radius: 50%;
+	
+	/* background : 이 부분 AJAX로 바꿔야 함. */
+	background: conic-gradient(
+		#007bff 0% 75%,
+		#ff00ff 75% 90%,
+		#ffa500 90% 92%,
+		#ccc 92% 100%
+	);
+	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	margin-bottom: 20px;
+}
+.donut-label {
+	width: 90%;
+	height: 90%;
+	background: #fff;
+	border-radius: 50%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	font-size: 13px;
+}
+@media (max-width: 900px) {
+	.account-nav {
+		width: 60px;
+	}
+	.account-container {
+		padding: 5px;
+	}
+	.item {
+		width: auto;
+		margin: 0 auto;
+	}
+	.item:nth-of-type(1) {
+		width: 40px;
+		height: 40px;
+		font-size: 11px;
+		margin-bottom: 20px;
+	}
+	img {
+		width: 20px;
+		height: 20px;
+	}
+	.account-box {
+		height: auto;
+		grid-template-columns: 1fr;
+		grid-gap: 5px;
+	}
+	.account-box-g {
+		min-height: 200px;
+		padding: 8px;
+	}
+	.account-box:nth-of-type(2) {
+		margin-top: 5px;
+	}
+	.account-box:nth-of-type(2) .account-box-g:first-child {
+		grid-column: 1;
+	}
+	.chart {
+		font-size: 13px;
+	}
+	.donut-label {
+		font-size: 9px;
+	}
+}
+
+
+
+
+
+
+

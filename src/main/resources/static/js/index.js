@@ -137,7 +137,7 @@ joinBtn.addEventListener('click', (event) => {
 		userid.name = 'userid';
 		password.name = 'password';
 		
-		formEl.action = '/login';
+		formEl.action = '/user/save';
 		formEl.method = 'post';
 		formEl.submit();
 	} else {

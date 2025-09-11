@@ -15,7 +15,9 @@
 		width: 100%;
 		height: 100vh;
 		display: flex;
-		flex-direction: column;	
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;	
 	}
 	.nav {
 		width: 100%;
@@ -43,45 +45,124 @@
 		font-family: RomanticGumi;
 	}
 	.container {
-		width: 70%;
-		min-width: 700px;
+		width: 25%;
+		min-width: 400px;
 		height: auto;
+		
+		background-color: #F5F5F5;
+		box-shadow: 0 12px 30px rgba(33, 33, 33, 0.15);
+		border: 1px solid rgba(33, 33, 33, 0.3);
+		border-radius: 15px;
+		
+		padding: 15px;
+		
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: center;
+	}
+	.box {
+		width: 95%;
+		height: 40px;
 		margin: 0 auto;
 		margin-top: 10px;
-		flex-grow: 1; /* flex-grow : nav때문에 밀린 height을 빼고 나머지 부분을 차지함 */
-		background: none;
-		display: grid;
-		grid-template-rows: 200px auto;
-		grid-gap: 50px;
-	}	
-	.grid-box {
-		background-color: #F5F5F5;
-		box-shadow: 0px 10px 20px rgba(33, 33, 33, 0.2);
-	}
-	.grid-box:nth-of-type(1) {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
 		justify-content: center;
-		
-		border-radius: 15px;
-		 
-		background-image: linear-gradient(45deg, #F5F5F5, #48CFCB, #229799, #424242);
-		background-size: 200%;
 	}
-	.grid-box:nth-of-type(1) div {
+	.box:nth-of-type(1) {
+		height: auto;
+		margin-bottom: 10px;
+		margin-top: 10px;
+		flex-direction: column;
+	}
+	.box:nth-of-type(1) h1 {
+		font-size: 25px;
+		font-weight: normal;
+		font-family: RomanticGumi;
+	}
+	.box:nth-of-type(1) div {
+		width: 70px;
+		height: 70px;
+		margin: 0 auto;
+		margin-top: 30px;
+		margin-bottom: 20px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		background-image: linear-gradient(45deg, #9ECAD6, #748DAE, #F5CBCB, #FFEAEA);
+		box-shadow: 0 0 12px rgba(251, 135, 218, 0.25);
+		color: white;
+		border-radius: 14px;
+		text-shadow: 0 0 2px #FFF;
+		background-size: 400% 100%;
+		transition: background-position 0.6s ease;
+	}
+	.box:nth-of-type(1) div:hover {
+		background-position: 100% 0;
+	}
+	.box .label {
+		width: 20%;
+		line-height: 100%;
+		text-align: center;
+	}
+	.box [type=text], .box [type=password] {
+		width: 80%;
+		height: 70%;
+		outline: none;
+		border: 1px solid rgba(33, 33, 33, 0.3);
+		padding-left: 5px;
+		font-size: 16px;
+		border-radius: 5px;
+	}
+	.box-hr {
+		width: 100%;
+		height: 1px;
+		border: none;
+		background-color: rgba(33, 33, 33, 0.3);
+		margin: 0 auto;
+	}
+	.box:nth-of-type(4) {
+		justify-content: space-around;
+		margin: 0px;
+	}
+	.box-a {
+		text-decoration: none;
+		font-size: 13px;
 		color: black;
-		font-size: 55px;
-		font-weight: 600;
-		letter-spacing: 2px;
+		padding: 5px;
 	}
-	.grid-box:nth-of-type(2) {
-		background-color: #333;
-		box-shadow: none;
+	.box-a:hover {
+		text-decoration: underline;
+	}
+	.box button {
+		width: 50%;
+		height: 80%;
+		font-size: 14px;
+		border: none;
+		outline: none;
+		background-image: linear-gradient(45deg, #9ECAD6, #748DAE, #F5CBCB, #FFEAEA);
+		background-size: 400% 100%;
+		transition: background-position 1s ease;
+		color: #F5F5F5;
+		font-weight: bolder;
+		border-radius: 5px;
+	}
+	.box button:hover {
+		transform: scale(1.05);
+		background-position: 100% 0;
+		box-shadow: 6px 6px 5px rgba(33, 33, 33, 0.3);
+		color: #333;
+	}
+	form {
+		display: contents;
 	}
 </style>
 </head>
 <body>
+	<!--
 	<div class="nav">
 		<div class="nav item">
 			<a href="#">Home</a>
@@ -89,13 +170,31 @@
 			<a href="#">Before</a>
 		</div>
 	</div>
+	-->
+	<form id="login-form">
 	<div class="container">
-		<div class="grid-box">
-			<div>My Account</div>
+		<div class="box">
+			<h1>My Account Login</h1>
+			<div>Acot</div>
 		</div>
-		<div class="grid-box">
-			
+			<div class="box">
+				<div class="label">아이디</div><input id="userid" type="text"/>
+			</div>
+			<hr class="box-hr">
+			<div class="box">
+				<div class="label">비밀번호</div><input id="password" type="password"/>
+			</div>
+		<hr class="box-hr">
+		<div class="box">
+			<a class="box-a" href="#">아이디 찾기</a>
+			<a class="box-a" href="#">비밀번호 찾기</a>
+			<a class="box-a" href="/join">회원가입</a>
+		</div>
+		<div class="box">
+			<button id="login" type="submit">로 그 인</button>
 		</div>
 	</div>
+	</form>
+<script src="/js/home.js"></script>
 </body>
 </html>

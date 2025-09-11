@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Error</title>
+<style>
+	body {
+		width: 100vw;
+		height: 100vh;
+		
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+	}
+	.error-container {
+		width: 500px;
+		height: 500px;
+		
+		background-color: #F5F5F5;
+		border: 1px solid rgba(33, 33, 33, 0.3);
+		
+		display: grid;
+		grid-template-columns: 30% 70%;
+		
+		border-radius: 10px;
+	}
+	.error-box:nth-of-type(1) {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+	img {
+		width: 100%;
+		height: 30%;
+	}
+	.error-box:nth-of-type(2) {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+	}
+	.error-box:nth-of-type(2) p {
+		font-size: 17px;
+		font-weight: bolder;
+		margin: 0px;
+		margin-bottom: 10px;
+	}
+	.error-box:nth-of-type(2) a {
+		width: 160px;
+		line-height: 40px;
+		border: none;
+		border-radius: 5px;
+		color: white;
+		font-size: 16px;
+		font-weight: bold;
+		background-color: #DC143CEE;
+		text-decoration: none;
+		text-align: center;
+	}
+	.error-box:nth-of-type(2) a:hover {
+		transform: scale(1.05);
+	}
+</style>
+</head>
+<body>
+	<div class="error-container">
+		<div class="error-box">
+			<img src="/image/xicon.png"/>
+		</div>
+		<div class="error-box">
+			<p>요청하신 페이지를 찾을 수 없습니다.</p>
+			<p>404 error</p>
+			<a href="/">로그인 페이지</a>
+		</div>
+	</div>
+</body>
+</html>

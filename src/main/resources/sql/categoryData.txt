@@ -1,0 +1,21 @@
+INSERT INTO categorys(category_id, cate_name, acot_flag) VALUES (
+   CATEGORY_SEQ.NEXTVAL,
+   '식비',
+   'SPENDING'
+);
+INSERT INTO categorys(category_id, cate_name, acot_flag) VALUES (
+   CATEGORY_SEQ.NEXTVAL,
+   '여행',
+   'SPENDING'
+);
+INSERT INTO categorys(category_id, cate_name, acot_flag) VALUES (
+   CATEGORY_SEQ.NEXTVAL,
+   '자기계발',
+   'SPENDING'
+);
+INSERT INTO categorys(category_id, cate_name, acot_flag) VALUES (
+   CATEGORY_SEQ.NEXTVAL,
+   '데이트',
+   'SPENDING'
+);
+commit;

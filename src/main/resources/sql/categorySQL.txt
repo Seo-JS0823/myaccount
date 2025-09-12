@@ -1,0 +1,11 @@
+# category_id 별 money 합계
+SELECT
+   category_id,
+   sum(money) AS totalMoney
+FROM
+   account_his
+WHERE
+   userid = 'admin123' AND
+   TO_DATE(acot_date, 'YYYY-MM-DD') BETWEEN TO_DATE('2025-09-01', 'YYYY-MM-DD') AND TO_DATE('2025-09-30', 'YYYY-MM-DD') AND
+   acot_flag = 'SPENDING'
+GROUP BY category_id;

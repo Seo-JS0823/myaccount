@@ -292,7 +292,7 @@ width는 .donut의 90%로 맞추고 background를 white로 설정하면
 	border-radius: 50%;
 	
 	/* background : 이 부분 AJAX로 바꿔야 함. */
-	background: conic-gradient(
+	background-image: conic-gradient(
 		#007bff 0% 75%,
 		#ff00ff 75% 90%,
 		#ffa500 90% 92%,

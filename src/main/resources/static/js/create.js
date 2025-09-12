@@ -32,19 +32,27 @@ const inputTag = function(className, type) {
 select 태그 만드는 함수
 json 배열을 받아서 option을 만듬
 */
-const selectTag = function(className, data = []) {
+const selectTag = function(className) {
 	let select = document.createElement('select');
 	if(className != null) {
 		select.className = className;
+		select.name = 'category_id';
 	}
-	if(data.length > 0) {
-		data.forEach( (els) => {
-			let option = document.createElement('option');
-			option.innerHTML = els.inner;
-			option.value = els.value;
-			select.appendChild(option);
-		});
-	}
+	fetch('/categoryList')
+		.then(response => {
+			if(!response.ok) {
+				throw new Error('네트워크 오류');
+			}
+			return response.json();
+		})
+		.then(data => {
+			data.forEach(el => {
+				let option = document.createElement('option');
+				option.innerHTML = el.cate_name;
+				option.value = el.category_id;
+				select.appendChild(option);
+			});
+		})
 	return select;
 }
 
@@ -128,23 +136,3 @@ createForm.forEach( (el) => {
 		
 	});	
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

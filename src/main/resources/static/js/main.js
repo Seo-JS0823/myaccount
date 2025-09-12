@@ -1,113 +1,123 @@
-const main = document.querySelectorAll('[id=main]');
-
-const pTag = function(text) {
-	let p = document.createElement('p');
-	if(text != null) {
-		p.innerHTML = text;
+const TagFactory = {
+	create(tag, className = '', text = '') {
+		const makeTag = document.createElement(tag);
+		if(className) makeTag.className = className;
+		if(text) makeTag.innerHTML = text;
+		return makeTag;
+	},
+	createOption(tag, className = '', data = []) {
+		const makeTag = document.createElement(tag);
+		if(className) makeTag.className = className;
+		if(data.length > 0) {
+			data.forEach((el) => {
+				let option = document.createElement('option');
+				option.innerHTML = el.content;
+				option.value = el.value;
+				makeTag.appendChild(option);
+			});
+		}
+		return makeTag;
+	},
+	div(className = '', text = '') {
+		return this.create('div', className, text);
+	},
+	p(className = '', text = '') {
+		return this.create('p', className, text);
+	},
+	select(className = '', options = []) {
+		return this.createOption('select', className, options);	
+	},
+	a(className = '', text = '', href = '') {
+		let aTag = this.create('a', className, text);
+		if(href) aTag.href = href;
+		return aTag;
 	}
-	return p;
 }
 
-main.forEach((el) => {
-	el.addEventListener('click', (el) => {
-		// HTML 초기화
-		dashboard.innerHTML = '';
-		dashboard.className = 'account-container';
+const dashboardInit = {
+	init(className = '') {
+		const dashboard = document.querySelector('[id=dashboard]');
+		if(dashboard != null) {
+			dashboard.innerHTML = '';
+		}
+		if(className) {
+			dashboard.className = className;
+		}
+		return dashboard;
+	}
+}
+
+/*
+도넛 제이슨 데이터
+one   : 지출 1위 카테고리
+two   : 지출 2위 카테고리
+three : 지출 3위 카테고리
+four  : 지출 4위 카테고리
+oneRatio   : 지출 1위 비율
+twoRatio   : 지출 2위 비율
+threeRatio : 지출 3위 비율
+fourRatio  : 지출 4위 비율
+const donutTest = {
+	one: '식비',
+	two: '여행',
+	three: '자기계발',
+	four: '데이트',
+	oneRatio: 47.5,
+	twoRatio: 27.3,
+	threeRatio: 14,
+	fourRatio: 11.2
+}
+*/
+
+const createDonut = {
+	donut(data = {}) {
+		const tag = TagFactory.div('donut');
+		const label = TagFactory.div('donut-label', data.one);
+		tag.appendChild(label);
 		
-		// account-box 2개 먼저 생성
-		let box1 = divTag('account-box');
-		let box2 = divTag('account-box');
+		const oneRatio = data.oneRatio;
+		const twoRatio = oneRatio + data.twoRatio;
+		const threeRatio = twoRatio + data.threeRatio;
+		const fourRatio = threeRatio + data.fourRatio;
 		
-		// box1 => account-box-g 3개
-		let boxg1 = divTag('account-box-g');
-		let boxg2 = divTag('account-box-g');
-		let boxg3 = divTag('account-box-g');
-		
-		// donut 만들기
-		let donut1 = divTag('donut');
-		let donut2 = divTag('donut');
-		let donut3 = divTag('donut');
-		let donut4 = divTag('donut');
-		
-		// donut-label 만들기
-		let donutT1 = divTag('donut-label');
-		donutT1.innerHTML = '1위 카테고리';
-		donut1.appendChild(donutT1);
-		
-		let donutT2 = divTag('donut-label');
-		donutT2.innerHTML = '1위 카테고리';
-		donut2.appendChild(donutT2);
-		
-		let donutT3 = divTag('donut-label');
-		donutT3.innerHTML = '1위 카테고리';
-		donut3.appendChild(donutT3);
-		
-		let donutT4 = divTag('donut-label');
-		donutT4.innerHTML = '1위 카테고리';
-		donut4.appendChild(donutT4);
-		
-		// boxg1,2,3 에 chart 2개씩 넣기
-		let chart1 = divTag('chart');
-		chart1.appendChild(donut1);
-		let p1 = pTag('이번달 지출 통계');
-		chart1.appendChild(p1);
-		
-		let chart2 = divTag('chart');
-		chart2.innerHTML = '지출 내역 리스트';
-		boxg1.appendChild(chart1);
-		boxg1.appendChild(chart2);
-		
-		let chart3 = divTag('chart');
-		chart3.appendChild(donut2);
-		let p2 = pTag('이번달 수입 통계');
-		chart3.appendChild(p2);
-		
-		let chart4 = divTag('chart');
-		chart4.innerHTML = '수입 내역 리스트';
-		boxg2.appendChild(chart3);
-		boxg2.appendChild(chart4);
-		
-		let chart5 = divTag('chart');
-		chart5.appendChild(donut3);
-		let p3 = pTag('전월 수입 통계');
-		chart5.appendChild(p3);
-		
-		let chart6 = divTag('chart');
-		chart6.appendChild(donut4);
-		let p4 = pTag('전월 지출 통계');
-		chart6.appendChild(p4);
-		
-		boxg3.appendChild(chart5);
-		boxg3.appendChild(chart6);
-		
-		
-		// box1 에 넣기
-		box1.appendChild(boxg1);
-		box1.appendChild(boxg2);
-		box1.appendChild(boxg3);
-		
-		
-		// box2 => account-box-g 2개 넣기
-		let boxg4 = divTag('account-box-g');
-		let boxg5 = divTag('account-box-g');
-		
-		// box2 에 넣기
-		box2.appendChild(boxg4);
-		box2.appendChild(boxg5);
-		
-		// chart 넣기
-		let chart7 = divTag('chart');
-		chart7.innerHTML = '사이트 소개말?';
-		let chart8 = divTag('chart');
-		let chart9 = divTag('chart');
-		
-		boxg4.appendChild(chart7);
-		boxg4.appendChild(chart8);
-		
-		boxg5.appendChild(chart9);
-		chart9.innerHTML = '기본적인 유저 정보';
-		
-		dashboard.appendChild(box1);
-		dashboard.appendChild(box2);
-	});
-});
+		tag.style.backgroundImage = `
+			conic-gradient(
+				#007BFF 0% ${oneRatio}%,
+				#FF00FF ${oneRatio}% ${twoRatio}%,
+				#FFA500 ${twoRatio}% ${threeRatio}%,
+				#CCC    ${threeRatio}% ${fourRatio}%
+			)
+		`;
+		return tag;
+	}
+}
+
+const createChart = {
+	chart(donut, pTagText) {
+		const tag = TagFactory.div('chart' , null);
+		const pTag = TagFactory.p(null, pTagText);
+		if(donut != null && pTag != null) {
+			tag.appendChild(donut);
+			tag.appendChild(pTag);
+		}
+		return tag;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

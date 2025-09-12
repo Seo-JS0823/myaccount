@@ -35,6 +35,42 @@ document.addEventListener('DOMContentLoaded', () => {
 			a.forEach( (el) => {
 				el.style.display = '';
 			});
+			nav.style.width = '300px';
 		}
 	});
 });
+
+/* 여기서부터 AJAX 코딩 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

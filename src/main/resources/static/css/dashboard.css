@@ -1,25 +1,42 @@
 @charset "UTF-8";
+/* 눈누 사이트에서 가져온 폰트 */
 @font-face {
     font-family: 'NexonMaplestory';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFLight.woff') format('woff');
     font-weight: 300;
     font-display: swap;
 }
+/* body : flex, row로 잡고 따로 수직 수평 정렬은 안함 */
 body {
 	width: 100vw;
 	height: 100vh;
 	display: flex;
 	flex-direction: row;
 }
+body::-webkit-scrollbar {
+	display: none;
+}
+/*
+transition: witch 0.3s ease
+창 크기가 줄어들면 width가 바뀌는데
+부드럽게 바뀌게 transition 적용
+ */
 img {
 	width: 40px;
 	height: 40px;
 	transition: width 0.3s ease;
 }
+/*
+flex-shrink : body의 child node가 account-nav인데
+body는 display: flex가 적용되어 child node가 전부 flexbox로 바뀜.
+flexbox는 width가 300px로 고정으로 박아두어도 %로 한 것 마냥 창크기에 따라
+줄어들기 때문에 flex-shrink를 적용하면 바뀌지 않음
+*/
 .account-nav {
 	flex-shrink: 0;
 	width: 300px;
 	height: 100%;
+	min-height: 480px;
 	background-color: #B0C4DE;
 	display: flex;
 	flex-direction: column;
@@ -28,6 +45,15 @@ img {
 	transition: width 0.5s ease;
 	border-right: 1px solid #333;
 }
+/*
+item : <a> 태그와 <img> 태그를 감싸는 div class임
+가로 정렬해야되서 flex - row로 설정하고
+수직 가운데 정렬을 위해 align-items : center 적용
+item 의 width가 100% 인데 margin-left: 30px는
+account-nav에서 중앙으로 맞추기위해서 적용함.
+width를 50%로 줄이고 margin: 0 auto하면
+margin-left는 필요없음
+*/
 .item {
 	width: 100%;
 	height: 80px;
@@ -36,6 +62,18 @@ img {
 	align-items: center;
 	margin-left: 30px;
 }
+/*
+item 의 첫 번째 노드인데 [Acot] 로고를 만든거임.
+이놈의 width가 100%가 아니라 80px인데 로고를 정사각형으로 맞추기 위해서 했음.
+여기에 hover되면 background-position이 좌끝 -> 우끝으로 이동됨.
+
+누르면 작동하는 로직은 JS에 있음.
+따로 id를 logo로 주고 querySelector('[id=logo]')로 가져와서
+const w = getComputedStyle(nav).width;
+getComputedStyle(nav).width로 nav태그의 width를 가져옴.
+nav.style.width로 가져와도 되지만 이렇게 하면 첫 번째 클릭이 작동하지 않음.
+이유는 inline-width라서 그럼
+*/
 .item:nth-of-type(1) {
 	justify-content: center;
 	width: 80px;
@@ -56,6 +94,10 @@ img {
 .item:nth-of-type(1):hover {
 	background-position: 100% 0;
 }
+/*
+item의 img 뒤에 위치하는 라벨 텍스트느낌으로 div 태그임
+white-space: nowrap은 부모의 width가 줄어도 글자가 줄바꿈되지 않게 설정함.
+*/
 .item-a {
 	text-decoration: none;
 	color: black;
@@ -64,7 +106,19 @@ img {
 	padding-left: 15px;
 	white-space: nowrap;
 }
-@media (max-width: 800px) {
+/*
+창의 width가 800px 이하가 되면 사이드창의 width가 103px로 줄어듬.
+103px로 한 이유는 눈대중으로 logo가 대충 중앙으로 보이게끔 한 것.
+이렇게 하니 JS에서 if문에 width == '60px' or width == '103px' 하는 것이 간단했음.
+근데 이렇게 해도 되는지 모르겠음.
+
+창 크기가 800px 이하가 되면 item-a : 라벨 텍스트가 없어짐.
+800px 이상으로 다시 돌아올때 display가 block으로 바뀌는데 이때
+나타나는 속도가 너무 빨라서 nav의 width가 다 커지기도 전에 글자가 나타나서
+JS에서 element를 들고와서 setTimeout 함수로 0.3s 늦춤
+item-a는 반복문이라서 forEach를 사용함
+*/
+@media (max-width: 1000px) {
 	.account-nav {
 		width: 103px;
 	}
@@ -72,6 +126,14 @@ img {
 		display: none;
 	}
 }
+/*
+account-nav 사이드바를 제외한 전체 영역인데
+flex-grow: 1; 로 설정하면 body에서 account-nav의 width를 뺀 남은 width로
+width가 잡힘. 그래서 width가 사이드바가 줄어들고 커질때 자동으로
+이 영역으 width가 그에 맞게 바뀜
+
+column으로 한 이유는 첫 번째 child node를 height 30%로 잡기위해서
+*/
 .account-container {
 	flex-grow: 1;
 	display: flex;
@@ -79,9 +141,22 @@ img {
 	padding: 30px;
 	overflow: auto;
 }
+/*
+창 크기가 줄어들면 account-container의
+height : auto로 설정되고 overflow auto 때문에
+스크롤이 가능해지는데 스크롤바 디자인을 숨기려면
+::-webkit-scrollbar 를 display: none 해야함.
+*/
 .account-container::-webkit-scrollbar {
 	display: none;
 }
+/*
+grid-gap은 child node의 gridbox들 사이사이 margin을 의미함.
+minmax는 최소한 400px로 설정되는 것을 의미함.
+그 이상이면 1fr로 적용됨.
+grid-template-columns를 보면 3개가 있는데, 1:1:1 비율로 설정되는 것을 의미함.
+창 크기가 줄어들어도 minmax(400px ...) 때문에 400px 이하로 width가 줄어들지 않음.
+*/
 .account-box {
 	width: 100%;
 	height: 30%;
@@ -90,8 +165,14 @@ img {
 	grid-template-columns: minmax(400px ,1fr) minmax(400px ,1fr) minmax(400px ,1fr);
 	grid-gap: 20px;
 }
+/*
+parent node(account-box)의 display가 grid라서 gridbox로 display가 적용되는디.
+이 내부는 flex로 설정했음.
+align-items를 안주는 이유는 child node의 width를 100%로 잡을거라서.
+대신 padding을 줘서 여백을 줌. 이걸 다른방식으로 하려면 child node의 width를 100%로 안잡고
+margin: 0 auto 줘도 됌.
+*/
 .account-box-g {
-	min-height: 250px;
 	background-color: white;
 	box-shadow: 0 0 10px rgba(66, 66, 66, 0.1);
 	border-radius: 5px;
@@ -99,48 +180,108 @@ img {
 	display: flex;
 	flex-direction: row;
 }
+/*
+account-box-g 안에 두 개의 div가 들어가는데 그것이 .chart class임.
+첫 번째 chart는 도넛차트를 보여주기위함.
+두 번째 chart는 지출내역을 리스트로 보여주기 위함.
+이것은 Oracle에서 OFFSET을 이용해서 상위 5~7개 정도? 가져올 수 있게.
+순위마다 색깔 다르게해서 AJAX로 css를 설정해야하지 싶음.
+*/
 .chart {
 	font-size: 25px;
 	text-align: center;
 	display: flex;
 	flex-direction: row;
 }
+/*
+아래 영역임.
+위와 account-box:nth-of-type(1)과 다르게
+height을 70%로 잡음
+margin-top: 20px는 grid-gap: 20px와 맞추기위해서.
+*/
 .account-box:nth-of-type(2) {
 	margin-top: 20px;
 	height: 70%;
 	min-height: 600px;
 }
+/*
+아래 영역도 grid-template-columns: 1fr 1fr 1fr이 적용되어 있는데
+위 차트영역의 왼쪽 2개 width와 맞추기 위해서 일단 grid로 display를 맞춤
+*/
 .account-box:nth-of-type(2) .account-box-g {
 	display: grid;
 }
+/*
+grid-column: 1 / span 2; 는
+테이블태그의 colspan: 2;와 같음
+이렇게 해야 차트영역의 왼쪽 2개와 width가 정확히 같아짐.
+
+내부는 grid-row로 맞췄는데 상단과 하단을 나누기 위함.
+첫 번째 child node를 30%로 맞추고 나머지 auto로 설정하면
+둘다 창 크기에 맞게 줄어들고 커짐
+*/
 .account-box:nth-of-type(2) .account-box-g:first-child {
 	grid-column: 1 / span 2;
 	grid-template-rows: 30% auto;
 	grid-gap: 10px;
 }
+/*
+알아보기 쉽게 background에 색을 줬는데
+나중에 여기에 어떤 내용을 넣는가에 따라 display 설정이 이곳에 들어가야댐
+*/
 .account-box:nth-of-type(2) .account-box-g .chart {
 	background-color: lightpink;
 }
+/*
+차트 영역의 account-box-g를 columns 1fr 1fr로 설정함.
+그러면 반반 50% 50%로 설정되는데 처음에는 30% 70% 였음.
+1fr 1fr로 한 이유는 => 도넛차트를 css로 그렸는데 border-radius가 50% 적용되어있음
+이게 chart 영역의 width가 30%이면 타원모양이 되어버림.
+정사각형으로 맞춰줘야 완전 동그라미가 됌
+*/
 .account-box:nth-of-type(1) .account-box-g {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-gap: 10px;
 }
-.account-box:nth-of-type(1) .chart:first-child {
+/*
+지출내역 리스트와 도넛 차트 아래 텍스트의
+글꼴을 나누기 위해서 .chart:first-child로 글꼴을 줌
+게다가 .chart는 전체적으로 display: flex;가 적용되어있어서
+여기서는 align-items, justify-content만 따로 주면 됌
+
+공통적인것은 .chart에 넣고 개별적으로 따로 적용되어야 할 것은
+first-child나 nth-of-type에서 넣는 방향이 좋은듯.
+*/
+.account-box:nth-of-type(1) .chart:first-child, 
+.account-box:nth-of-type(1) .account-box-g:nth-of-type(3) .chart {
 	align-items: center;
 	justify-content: center;
 	font-family: NexonMaplestory;
 	flex-direction: column;
 }
-.account-box:nth-of-type(1) .account-box-g:nth-of-type(3) {
-	grid-template-columns: 1fr 1fr;
-}
+/* ----------------------------------------------------------------
+마지막 account-box-g는 도넛 차트를 두개 보여줘야 하기 때문에
+따로 또 같은 설정이 들어감.
+이렇게 따로 해도 되고, 위 처럼 콤마(,)로 나눠도 됌.
 .account-box:nth-of-type(1) .account-box-g:nth-of-type(3) .chart {
 	align-items: center;
 	flex-direction: column;
 	font-family: NexonMaplestory;
 	justify-content: center;
 }
+---------------------------------------------------------------- */
+
+/*
+css로 도넛 차트 그린거임
+원형으로 하기 위해서 border-radius: 50%를 줌
+안에 들어가는 text 라벨도 똑같이 border-radius를 50%주고
+width는 .donut의 90%로 맞추고 background를 white로 설정하면
+원형 링 모양으로 만들 수 있음.
+
+나중에 실제 데이터에 맞게 색 별로 %를 나눠야하는데
+이것은 JS에서 fetch안에 style로 넣어야함.
+*/
 .donut {
 	width: 50%;
 	height: 50%;
@@ -153,13 +294,20 @@ img {
 		#ffa500 90% 92%,
 		#ccc 92% 100%
 	);
+	/* -------------------------------------- */
 	
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	position: relative;
 	margin-bottom: 20px;
 }
+/*
+도넛 차트 안에 들어가는 텍스트임.
+위에서 말한것과 마찬가지로
+border-radius: 50%로 원형으로 만들고
+parent node의 width 90%로 설정해서 원형 링 모양으로 보이게 설정함.
+background white로 흰색 모양으로 설정하면 도넛 링 완성
+*/
 .donut-label {
 	width: 90%;
 	height: 90%;
@@ -171,7 +319,14 @@ img {
 	justify-content: center;
 	font-size: 13px;
 }
-@media (max-width: 900px) {
+/*
+nav 영역의 로그아웃 버튼인데
+margin-top: auto를 주면 맨 아래로 내려감
+*/
+.last {
+	margin-top: auto;
+}
+@media (max-width: 1000px) {
 	.account-nav {
 		width: 60px;
 	}
@@ -187,6 +342,9 @@ img {
 		height: 40px;
 		font-size: 11px;
 		margin-bottom: 20px;
+	}
+	.item:last-child {
+		margin-top: auto;
 	}
 	img {
 		width: 20px;

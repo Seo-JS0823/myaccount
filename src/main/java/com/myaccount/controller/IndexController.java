@@ -10,6 +10,8 @@ import com.myaccount.dto.UserDTO;
 import com.myaccount.model.User;
 import com.myaccount.service.UserService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class IndexController {
 	
@@ -42,6 +44,13 @@ public class IndexController {
 		User target = userService.userLogin(user.getUserid());
 		model.addAttribute("user", target);
 		return "account/dashboard";
+	}
+	
+	// 로그아웃
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
 	}
 	
 }

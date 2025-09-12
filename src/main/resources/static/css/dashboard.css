@@ -1,4 +1,7 @@
 @charset "UTF-8";
+* {
+	box-sizing: border-box;
+}
 /* 눈누 사이트에서 가져온 폰트 */
 @font-face {
     font-family: 'NexonMaplestory';
@@ -12,6 +15,7 @@ body {
 	height: 100vh;
 	display: flex;
 	flex-direction: row;
+	background-color: #F5F5F5;
 }
 body::-webkit-scrollbar {
 	display: none;
@@ -118,7 +122,7 @@ white-space: nowrap은 부모의 width가 줄어도 글자가 줄바꿈되지 �
 JS에서 element를 들고와서 setTimeout 함수로 0.3s 늦춤
 item-a는 반복문이라서 forEach를 사용함
 */
-@media (max-width: 1000px) {
+@media (max-width: 850px) {
 	.account-nav {
 		width: 103px;
 	}
@@ -162,7 +166,7 @@ grid-template-columns를 보면 3개가 있는데, 1:1:1 비율로 설정되는 
 	height: 30%;
 	margin: 0 auto;
 	display: grid;
-	grid-template-columns: minmax(400px ,1fr) minmax(400px ,1fr) minmax(400px ,1fr);
+	grid-template-columns: 1fr 1fr 1fr;
 	grid-gap: 20px;
 }
 /*
@@ -188,7 +192,7 @@ account-box-g 안에 두 개의 div가 들어가는데 그것이 .chart class임
 순위마다 색깔 다르게해서 AJAX로 css를 설정해야하지 싶음.
 */
 .chart {
-	font-size: 25px;
+	font-size: 1em;
 	text-align: center;
 	display: flex;
 	flex-direction: row;
@@ -326,7 +330,7 @@ margin-top: auto를 주면 맨 아래로 내려감
 .last {
 	margin-top: auto;
 }
-@media (max-width: 1000px) {
+@media (max-width: 850px) {
 	.account-nav {
 		width: 60px;
 	}
@@ -372,6 +376,103 @@ margin-top: auto를 주면 맨 아래로 내려감
 		font-size: 9px;
 	}
 }
+
+/* AJAX : 게시판 등록 뷰 CSS */
+/* 최상위 부모 Node : create-container */
+.create-container {
+	max-width: 60rem;
+	height: auto;
+	flex-grow: 1;
+	background-color: #F5F5F5;
+	display: grid;
+	grid-template-columns: 30% auto;
+	grid-gap: 10px;
+	font-size: 10px;
+	padding: 10px;
+	margin: 0 auto;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+.create-box {
+	background-color: white;
+	box-shadow: 0 0 10px rgba(33, 33, 33, 0.1);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+}
+.create-box:first-child {
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+.create-box:last-child {
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+.create-text:first-child {
+	border-top-right-radius: 10px;
+	width: 100%;
+	line-height: 100px;
+	font-size: 2.5rem;
+	padding-left: 20px;
+	margin-bottom: 3rem;
+	background-color: #1E90FF;
+	color: white;
+}
+.create-text {
+	width: 80%;
+	font-size: 1.2rem;
+	font-weight: 600;
+	margin-bottom: 0.5rem;
+}
+.create-in {
+	width: 80%;
+	margin: 0 auto;
+	height: 40px;
+	outline: none;
+	border: 1px solid rgba(33, 33, 33, 0.3);
+	border-radius: 8px;
+	font-size: 1.5em;
+	padding-left: 5px;
+	margin-bottom: 20px;
+}
+.create-btn-box {
+	width: 80%;
+	height: 60px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+}
+.create-btn {
+	width: 50%;
+	height: 80%;
+	background-color: #1E90FF;
+	color: white;
+	border: none;
+	border-radius: 10px;
+	transition: transform 0.6s ease;
+	font-size: 1.2rem;
+}
+.create-btn:hover {
+	transform: scale(1.15);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

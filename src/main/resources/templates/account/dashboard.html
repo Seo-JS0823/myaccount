@@ -11,18 +11,42 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <script src="/js/account.js"></script>
 </head>
 <body>
-<!-- side : nav 영역 -->
+<!-- side : nav 영역 
 <th:block layout:fragment="nav" th:include="@{/layouts/nav}"></th:block>
+-->
+<nav id="account-nav" class="account-nav">
+	<div id="logo" class="item">Acot</div>
+	<div class="item">
+		<a id="main" href="#"><img src="/icon/icon02.png"/></a>
+		<a id="main" class="item-a" href="#">가계부 홈</a>
+	</div>
+	<div class="item">
+		<a id="create" href="/account/createForm"><img src="/icon/icon04.png"/></a>
+		<a id="create" class="item-a" href="/account/createForm">가계부 등록</a>
+	</div>
+	<div class="item">
+		<a href="#"><img src="/icon/icon05.png"/></a>
+		<a class="item-a" href="#">통계내기</a>
+	</div>
+	<div class="item">
+		<a href="#"><img src="/icon/icon03.png"/></a>
+		<a class="item-a" href="#">내 정보 변경</a>
+	</div>
+	<div class="item last">
+		<a href="/logout"><img src="/icon/logout.png/"></a>
+		<a class="item-a" href="/logout">로그아웃</a>
+	</div>
+</nav>
 
 <!-- main : content 영역 -->
-<div class="account-container">
+<div id="dashboard" class="account-container">
 	<div class="account-box">
 		<div class="account-box-g">
 			<div class="chart">
 				<div class="donut">
 					<div class="donut-label">1위 카테고리</div>
 				</div>
-				이번달 지출 통계
+				<p>이번달 지출 통계</p>
 			</div>
 			<div class="chart">
 				지출 내역 리스트
@@ -70,5 +94,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 		</div>
 	</div>
 </div>
+<script src="/js/create.js"></script>
+<script src="/js/main.js"></script>
 </body>
 </html>

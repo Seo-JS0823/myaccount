@@ -11,8 +11,10 @@ import com.myaccount.model.User;
 import com.myaccount.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
+@Slf4j
 public class IndexController {
 	
 	@Autowired
@@ -41,7 +43,7 @@ public class IndexController {
 	// 로그인 실행
 	@PostMapping("/login")
 	public String login(UserDTO user, Model model) {
-		User target = userService.userLogin(user.getUserid());
+		User target = userService.userLogin(user.getUserid(), user.getPassword());
 		model.addAttribute("user", target);
 		return "account/dashboard";
 	}

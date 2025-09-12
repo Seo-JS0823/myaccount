@@ -1,13 +1,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-	<nav id="account-nav" class="account-nav">
+<nav id="account-nav" class="account-nav">
 	<div id="logo" class="item">Acot</div>
 	<div class="item">
 		<a href="#"><img src="/icon/icon02.png"/></a>
 		<a class="item-a" href="#">가계부 홈</a>
 	</div>
 	<div class="item">
-		<a href="#"><img src="/icon/icon04.png"/></a>
-		<a class="item-a" href="#">가계부 등록</a>
+		<a id="create" href="/account/createForm"><img src="/icon/icon04.png"/></a>
+		<a id="create" class="item-a" href="/account/createForm">가계부 등록</a>
 	</div>
 	<div class="item">
 		<a href="#"><img src="/icon/icon05.png"/></a>
@@ -22,4 +22,5 @@
 		<a class="item-a" href="/logout">로그아웃</a>
 	</div>
 </nav>
+<script src="/js/nav.js"></script>
 </html>

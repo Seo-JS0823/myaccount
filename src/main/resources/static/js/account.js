@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 	const logo = document.querySelector('[id=logo]');
 	logo.addEventListener('click', (e) => {
-		if(window.innerWidth > 900) {
+		if(window.innerWidth > 850) {
 			let nav = document.querySelector('[id=account-nav]');
 			let a = document.querySelectorAll('[class=item-a]');
 			const w = getComputedStyle(nav).width;
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	window.addEventListener('resize', () => {
 		let nav = document.getElementById('account-nav');
 		let a = document.querySelectorAll('.item-a');
-		if (window.innerWidth <= 900) {
+		if (window.innerWidth <= 850) {
 			nav.style.width = '';
 		} else {
 			a.forEach( (el) => {

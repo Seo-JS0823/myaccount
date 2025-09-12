@@ -21,8 +21,8 @@ public class UserService {
 	}
 	
 	/* 로그인 */
-	public User userLogin(String userid) {
-		User target = userRep.findById(userid).orElse(null);
+	public User userLogin(String userid, String password) {
+		User target = userRep.findByUseridAndPassword(userid, password).orElse(null);
 		return target;
 	}
 	
